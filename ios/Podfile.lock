@@ -1,0 +1,70 @@
+PODS:
+  - adhan_flutter (0.0.1):
+    - Flutter
+  - Flutter (1.0.0)
+  - flutter_compass (0.0.1):
+    - Flutter
+  - flutter_qiblah (0.0.1):
+    - Flutter
+  - fluttertoast (0.0.2):
+    - Flutter
+  - geolocator (5.3.1):
+    - Flutter
+  - google_api_availability (2.0.4):
+    - Flutter
+  - location (0.0.1):
+    - Flutter
+  - location_permissions (2.0.5):
+    - Flutter
+  - vibration (1.4.0):
+    - Flutter
+
+DEPENDENCIES:
+  - adhan_flutter (from `.symlinks/plugins/adhan_flutter/ios`)
+  - Flutter (from `Flutter`)
+  - flutter_compass (from `.symlinks/plugins/flutter_compass/ios`)
+  - flutter_qiblah (from `.symlinks/plugins/flutter_qiblah/ios`)
+  - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
+  - geolocator (from `.symlinks/plugins/geolocator/ios`)
+  - google_api_availability (from `.symlinks/plugins/google_api_availability/ios`)
+  - location (from `.symlinks/plugins/location/ios`)
+  - location_permissions (from `.symlinks/plugins/location_permissions/ios`)
+  - vibration (from `.symlinks/plugins/vibration/ios`)
+
+EXTERNAL SOURCES:
+  adhan_flutter:
+    :path: ".symlinks/plugins/adhan_flutter/ios"
+  Flutter:
+    :path: Flutter
+  flutter_compass:
+    :path: ".symlinks/plugins/flutter_compass/ios"
+  flutter_qiblah:
+    :path: ".symlinks/plugins/flutter_qiblah/ios"
+  fluttertoast:
+    :path: ".symlinks/plugins/fluttertoast/ios"
+  geolocator:
+    :path: ".symlinks/plugins/geolocator/ios"
+  google_api_availability:
+    :path: ".symlinks/plugins/google_api_availability/ios"
+  location:
+    :path: ".symlinks/plugins/location/ios"
+  location_permissions:
+    :path: ".symlinks/plugins/location_permissions/ios"
+  vibration:
+    :path: ".symlinks/plugins/vibration/ios"
+
+SPEC CHECKSUMS:
+  adhan_flutter: 9dd4753cd7b9149f50421188acb2b9777bb276ed
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  flutter_compass: cbbd285cea1584c7ac9c4e0c3e1f17cbea55e855
+  flutter_qiblah: f69eeb708d127a2634073ab1f27771c979928f50
+  fluttertoast: b644586ef3b16f67fae9a1f8754cef6b2d6b634b
+  geolocator: 460cc8e850b616f8c0e90944c86517d91ccbb686
+  google_api_availability: 15fa42a8cd83c0a6738507ffe6e87096f12abcb8
+  location: 3a2eed4dd2fab25e7b7baf2a9efefe82b512d740
+  location_permissions: 4a49d4e5bec5b653643e551ab77963cc99bb0e4a
+  vibration: 2275f5e3ab5da73de1d948dc96c026799e08ff6d
+
+PODFILE CHECKSUM: 1b66dae606f75376c5f2135a8290850eeb09ae83
+
+COCOAPODS: 1.9.3
