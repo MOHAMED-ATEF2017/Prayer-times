@@ -158,42 +158,13 @@ class _PrayerTimeState extends State<PrayerTime> {
             ],
           ),
           SizedBox(
-            height: 8,
+            height: 5,
           )
         ],
       ),
     );
   }
 
-//  Widget itemTimer(String name, String number) {
-//    return Container(
-//      child: Column(
-//        children: <Widget>[
-//          Text(
-//            name,
-//            style: TextStyle(fontFamily: 'Sukar', fontWeight: FontWeight.w900),
-//          ),
-//          Card(
-//            shape: RoundedRectangleBorder(
-//                borderRadius: BorderRadius.circular(5.0)),
-//            color: appColor,
-//            child: Padding(
-//              padding: const EdgeInsets.all(8.0),
-//              child: Text(
-//                number,
-//                textAlign: TextAlign.center,
-//                style: TextStyle(
-//                    fontFamily: 'Sukar',
-//                    fontWeight: FontWeight.w900,
-//                    fontSize: 20,
-//                    color: Colors.white),
-//              ),
-//            ),
-//          ),
-//        ],
-//      ),
-//    );
-//  }
 
   Widget itemDivider() {
     return Container(
@@ -273,6 +244,7 @@ class _PrayerTimeState extends State<PrayerTime> {
             Image.asset(
               'assets/stars.png',
               fit: BoxFit.contain,
+              color: Color(0xff4EA1B5),
             ),
 
             // Mosque Image
@@ -333,6 +305,7 @@ class _PrayerTimeState extends State<PrayerTime> {
                   ),
                 ),
 
+                // Timer
                 FutureBuilder(
                   future: getNextPrayer(),
                   builder: (context, AsyncSnapshot<Prayer> snapshot) {
@@ -527,13 +500,12 @@ class _PrayerTimeState extends State<PrayerTime> {
                   Provider.of<PrayerTimes>(context, listen: false)
                       .prayer
                       .date,
-                  // " ${DateFormat.yMMMd().format(DateTime.now())} - ${UmmAlquraCalendar.fromDate(DateTime.now()).toFormat("MMMM dd, yyyy")} - ${DateFormat.EEEE().format(DateTime.now())}",
 
                   style: TextStyle(
                     fontFamily: 'Sukar',
                     letterSpacing: 1,
                     fontSize: 14,
-                    fontWeight: FontWeight.w400,
+                    fontWeight: FontWeight.normal,
                     color: Color(0xff191818),
                   ),
                 )
@@ -559,8 +531,9 @@ class _PrayerTimeState extends State<PrayerTime> {
                     SizedBox(
                       width: 4,
                     ),
+
                     Image.asset(
-                      "assets/pin_1_@2x.png",
+                      "assets/pin.png",
                       width: 10,
                       height: 12,
                     )
@@ -580,6 +553,7 @@ class _PrayerTimeState extends State<PrayerTime> {
                       borderRadius: BorderRadius.circular(20.0)),
                   child: Column(
                     children: <Widget>[
+                      // Table header
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.only(
@@ -629,7 +603,7 @@ class _PrayerTimeState extends State<PrayerTime> {
                                             fontSize: 14),
                                       ),
 
-                                      // Icon
+                                      // Icon Calender
                                       Container(
                                         width: 18.64,
                                         height: 20.43,
@@ -850,7 +824,7 @@ class _PrayerTimeState extends State<PrayerTime> {
     final adhan = AdhanFlutter.create(
         Coordinates(_currentPosition.latitude, _currentPosition.longitude),
         DateTime.now(),
-        CalculationMethod.EGYPTIAN);
+        CalculationMethod.KARACHI);
 
     adhan.nextPrayer().then((prayer) {
       print("mapNext[prayer]");
