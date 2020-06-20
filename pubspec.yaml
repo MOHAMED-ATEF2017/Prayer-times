@@ -29,6 +29,7 @@ dependencies:
   path: ^1.6.4
   flutter_rounded_date_picker: ^1.0.4
   expansion_card: ^0.1.0
+  shared_preferences: ^0.5.7+3
 
   #  hijri_picker: ^1.0.0
 

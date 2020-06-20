@@ -5,6 +5,8 @@ import 'package:flutter_qiblah_example/helper/http_helper.dart';
 import 'package:flutter_qiblah_example/model/Location_Query_Auto_Complete.dart';
 import 'package:flutter_qiblah_example/model/location_methods_setting.dart';
 import 'package:flutter_qiblah_example/model/player-model.dart';
+import 'package:flutter_qiblah_example/model/prayer_setting_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class PrayerTimes with ChangeNotifier {
@@ -33,11 +35,6 @@ class PrayerTimes with ChangeNotifier {
   List<LocationAndMethods> get locationMethods{
     return locationMethodsList;
   }
-
-
-// ----------------------------  Set Value ----------------------------
-
-
 
 // ----------------------  Times ----------------------------
 
@@ -101,5 +98,31 @@ class PrayerTimes with ChangeNotifier {
       throw error;
     }
   }
+
+//------------------------- get setting values -----------------
+
+Future<PrayerSettingModel> getSettingValue ()async {
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  final SharedPreferences prefs = await _prefs;
+  return PrayerSettingModel.fromJson(prefs.get("prayerSetting"));
+  
+}
+
+
+//------------------------- set setting values -----------------
+
+  Future<void> setSettingValue (PrayerSettingModel modelSetting)async {
+    Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+    final SharedPreferences prefs = await _prefs;
+prefs.setString("prayerSetting", modelSetting.toString());
+print("khkhkhkhkhkhkkhkkhkhhk");
+
+modelSetting = prefs.get("prayerSetting");
+    print(json.decode(modelSetting.mazhab));
+
+    
+
+  }
+
 
 }

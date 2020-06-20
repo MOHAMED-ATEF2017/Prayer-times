@@ -1,12 +1,15 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_qiblah_example/model/location_methods_setting.dart';
+import 'package:flutter_qiblah_example/model/prayer_notification_model.dart';
+import 'package:flutter_qiblah_example/model/prayer_setting_model.dart';
 import 'package:flutter_qiblah_example/provider/prayer_times.dart';
 import 'package:flutter_qiblah_example/pyayer/widgets/custom_widgets.dart';
-import 'package:flutter_qiblah_example/qiblah/qiblah_compass.dart';
 import 'package:provider/provider.dart';
+
+import 'widgets/custom_widgets.dart';
+import 'widgets/custom_widgets.dart';
 
 class PrayerTimeSetting extends StatefulWidget {
   static String id = 'prayerTimeSetting';
@@ -49,12 +52,25 @@ class _PrayerTimeSettingState extends State<PrayerTimeSetting> {
   bool isSwitchedIshaAdhan = false;
   bool isSwitchedIshaAfter = false;
 
+
   var scrollPosition;
   ScrollController _scrollController;
+  PrayerSettingModel prayerSettingModel ;
+  List<String> listMethod = List<String>();
 
   @override
   void initState() {
     super.initState();
+    Provider.of<PrayerTimes>(context, listen: false).locationMethods.forEach((item){
+      setState(() {
+        listMethod.add(item.name);
+      });
+    });
+   Provider.of<PrayerTimes>(context, listen: false).getSettingValue().then((model){
+     setState(() {
+       prayerSettingModel = model;
+     });
+   });
     /*
     Timer.run(() {
       scrollPosition = _scrollController.position;
@@ -68,6 +84,32 @@ class _PrayerTimeSettingState extends State<PrayerTimeSetting> {
 //    dropdownValueOfMethod = "رابطة العالم الاسلامى";
     // dropdownValue2 = 'اختر المذهب';
     //dropdownValueSound = 'اختر المؤذن';
+  }
+
+
+
+  void doneFunction(){
+  PrayerSettingModel _prayerSettingModel = PrayerSettingModel();
+  List<PrayerNotificationModel> listNotModel =  List<PrayerNotificationModel> ();
+
+  _prayerSettingModel.calMethod = dropdownValueOfMethod;
+  _prayerSettingModel.mazhab = dropdownValue2;
+  _prayerSettingModel.prayerVoice = dropdownValueSound;
+  _prayerSettingModel.backgroundWorking = isSwitchedBackGround;
+  _prayerSettingModel.typeNotification = chosen1;
+if(chosen1){
+  PrayerNotificationModel prayerNotificationModel = PrayerNotificationModel();
+  prayerNotificationModel.beforeAdhan = CustomSettingAlarm().timer;
+  prayerNotificationModel.alertByAdhan = isSwitchedAllAdhan;
+  prayerNotificationModel.afterAdhan = CustomSettingAlarm().timer;
+  listNotModel.add(prayerNotificationModel);
+}
+
+
+
+  Provider.of<PrayerTimes>(context, listen: false).setSettingValue(_prayerSettingModel);
+
+
   }
 
   @override
@@ -144,11 +186,11 @@ class _PrayerTimeSettingState extends State<PrayerTimeSetting> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(color: Color(0xff707070))),
-                    child: DropdownButton<LocationAndMethods>(
+                    child: DropdownButton<String>(
                       icon: Icon(Icons.keyboard_arrow_down,color: Color.fromRGBO(78, 161, 181, 1),size: 20,),
 
                       hint: Text(
-                        "رابطة العالم الاسلامى",
+                        "اختر طريقة الحساب",
                         style: TextStyle(
                           fontFamily: 'Sukar',
                           fontSize: 14,
@@ -156,24 +198,25 @@ class _PrayerTimeSettingState extends State<PrayerTimeSetting> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-
+value:  dropdownValueOfMethod,
 //
                       underline: Container(
                         color: Colors.white,
                       ),
-                      onChanged: (LocationAndMethods newValue) {
+                      onChanged: (String newValue) {
                         setState(() {
-                          dropdownValueOfMethod = newValue.name;
+                          dropdownValueOfMethod = newValue;
+
                         });
                       },
-                      items:  Provider.of<PrayerTimes>(context, listen: false).locationMethods
-                          .map<DropdownMenuItem<LocationAndMethods>>((LocationAndMethods value) {
-                        return DropdownMenuItem<LocationAndMethods>(
+                      items: listMethod
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
                           value: value,
                           child: Container(
                               width: MediaQuery.of(context).size.width * .8,
                               child: Text(
-                                value.name,
+                                value,
                                 style: TextStyle(
                                   fontFamily: 'Sukar',
                                   fontWeight: FontWeight.normal,
@@ -190,7 +233,7 @@ class _PrayerTimeSettingState extends State<PrayerTimeSetting> {
                 ],
               ),
 
-// Elmathhab
+              // Elmathhab
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -314,7 +357,7 @@ class _PrayerTimeSettingState extends State<PrayerTimeSetting> {
                 ],
               ),
 
-// Background Word
+              // Background Word
               Padding(
                 padding: const EdgeInsets.only(right: 8),
                 child: Row(
@@ -367,7 +410,7 @@ class _PrayerTimeSettingState extends State<PrayerTimeSetting> {
                 height: 8,
               ),
 
-// Buttons
+              // Buttons
               Container(
                 width: MediaQuery.of(context).size.width * .95,
                 child: Row(
@@ -632,7 +675,9 @@ class _PrayerTimeSettingState extends State<PrayerTimeSetting> {
                     shape: StadiumBorder(
                         side: BorderSide(color: Color.fromRGBO(78, 161, 181, 1))),
                     color: Colors.white,
-                    onPressed: () {},
+                    onPressed: () {
+                      doneFunction();
+                    },
                     child: Text(
                       'تم',
                       style: TextStyle(
